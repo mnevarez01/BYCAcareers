@@ -1,14 +1,15 @@
 import React from "react";
+import './style.css'
 
 function Nav() {
   return (
     <nav>
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo right">Logo</a>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <li><a href="sass.html">Sass</a></li>
-          <li><a href="badges.html">Components</a></li>
-          <li><a href="collapsible.html">JavaScript</a></li>
+      <div className="nav-wrapper color lighten-4">
+        <img src='https://i.imgur.com/637qk5Y.png' rel='logo' className='image' />
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="sass.html">Services</a></li>
+          <li><a href="badges.html">Testimonials</a></li>
+          <li><a href="collapsible.html">Contact</a></li>
         </ul>
       </div>
     </nav>
