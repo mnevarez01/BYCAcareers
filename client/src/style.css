@@ -1,3 +1,9 @@
 body{
-  background-image: url('https://i.imgur.com/KqHXwnm.png')
+  background: url('https://i.imgur.com/KqHXwnm.png');
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+
 }
