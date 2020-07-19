@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-function Testimonials({ author, testimony }) {
+function Testimonials({ info }) {
 
   return (
-    <div className='row'>
-      <div className='col-sm-6'>
 
-        <div className="card">
-          <div className="card-header">
-            Quote
-             </div>
-          <div className="card-body">
-            <blockquote className="blockquote mb-0">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-              <footer className="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-            </blockquote>
+    <div className='container'>
+      {info.length > 0 ? <>
+        {info.map(({ author, testimony }) => (
+
+          <div className='row'>
+            <div className='col-sm-6'>
+              <div className="card">
+                <div className="card-header">
+                  {author}
+                </div>
+                <div className="card-body">
+                  <blockquote className="blockquote mb-0">
+                    <p>{testimony}</p>
+                    <footer className="blockquote-footer">Thank you, <cite title="Source Title">{author}</cite></footer>
+                  </blockquote>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        ))}
+      </> : <><h1>No results found.</h1><br /><h3>Login to add your own content.</h3></>}
     </div>
   )
 }

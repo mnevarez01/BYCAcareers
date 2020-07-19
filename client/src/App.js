@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
 import Testimonials from './components/Testimonials'
 import HeroBanner from './components/HeroBanner'
+import Contact from './components/Contact'
 import API from "./utils/API";
-import './style.css'
+// import './style.css'
 
 function App() {
   const [info, setInfo] = useState([]);
@@ -18,7 +19,8 @@ function App() {
       <div className="background">
         <Nav />
         <HeroBanner />
-        {/* <Testimonials author={author} testimony={testimony} /> */}
+        <Testimonials info={info} />
+        <Contact />
         {/* <Switch>
           <Route exact path="/" component={Books} />
           <Route exact path="/books" component={Books} />
