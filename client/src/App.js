@@ -18,15 +18,22 @@ function App() {
     <Router>
       <div className="background">
         <Nav />
-        <HeroBanner />
-        <Testimonials info={info} />
-        <Contact />
-        {/* <Switch>
-          <Route exact path="/" component={Books} />
-          <Route exact path="/books" component={Books} />
+        <Switch>
+          <Route exact path='/'>
+            <HeroBanner />
+          </Route>
+
+          <Route exact path='/testimonials'>
+            <Testimonials info={info} />
+          </Route>
+
+          <Route exact path='/contact'>
+            <Contact />
+          </Route>
+
           <Route exact path="/books/:id" component={Detail} />
           <Route component={NoMatch} />
-        </Switch> */}
+        </Switch>
       </div>
     </Router>
   );
