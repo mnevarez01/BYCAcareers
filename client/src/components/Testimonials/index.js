@@ -8,7 +8,7 @@ function Testimonials({ info }) {
       {info.length > 0 ? <>
         {info.map(({ author, testimony }) => (
 
-          <div className='row'>
+          <div className='row' key={author}>
             <div className='col-sm-6'>
               <div className="card">
                 <div className="card-header">

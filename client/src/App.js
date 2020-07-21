@@ -14,6 +14,8 @@ function App() {
       .then((res) => setInfo(res.data))
       .catch((err) => console.log(err))
   }, [])
+
+
   return (
     <Router>
       <div className="background">
@@ -31,8 +33,7 @@ function App() {
             <Contact />
           </Route>
 
-          <Route exact path="/books/:id" component={Detail} />
-          <Route component={NoMatch} />
+
         </Switch>
       </div>
     </Router>
