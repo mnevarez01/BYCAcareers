@@ -1,9 +1,9 @@
 const express = require("express");
 const nodemailer = require('nodemailer')
 const bodyParser = require('body-parser')
-
 const mongoose = require("mongoose");
 const routes = require("./routes");
+const { getMaxListeners } = require("./models/testimony");
 
 
 
@@ -12,19 +12,16 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
 // Serve up static assets (usually on heroku)
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 // Add routes, both API and view
-app.use(routes);
-// Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Testimony");
-
-//testing email set up:
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   res.send('Server is working. Please post at "/contact" to submit a message.')
@@ -61,11 +58,12 @@ app.post('/api/contact', (req, res) => {
     `
   };
 
-  smtpTransport.sendMail(mailOptions, (res, err) => {
+  smtpTransport.sendMail(mailOptions, (err) => {
     if (err) {
-      res.send(err)
+      console.log('failure', err)
     }
     else {
+      console.log('success!')
       res.send('Success')
     }
   })
@@ -73,12 +71,15 @@ app.post('/api/contact', (req, res) => {
   smtpTransport.close();
 
 
-})
+});
 
+app.use(routes);
+// Connect to the Mongo DB
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Testimony");
 
-
-// Define middleware here
-
+//testing email set up:
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // Start the API server
