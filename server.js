@@ -3,7 +3,8 @@ const nodemailer = require('nodemailer')
 const bodyParser = require('body-parser')
 const mongoose = require("mongoose");
 const routes = require("./routes");
-const { getMaxListeners } = require("./models/testimony");
+const process = require('dotenv').config()
+// const { getMaxListeners } = require("./models/testimony");
 
 
 
@@ -35,8 +36,8 @@ app.post('/api/contact', (req, res) => {
     service: "Gmail",
     port: 465,
     auth: {
-      user: 'nevarez.mariad@gmail.com',
-      pass: 'IRene060464!'
+      user: process.env.DB_USER,
+      pass: process.env.DB_PASS
     }
   })
 

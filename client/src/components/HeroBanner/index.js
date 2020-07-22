@@ -47,7 +47,7 @@ export class HeroBanner extends React.Component {
   }
 
   static defaultProps = {
-    heroImage: "https://i.imgur.com/3mTyLlA.jpg",
+    heroImage: "https://i.imgur.com/KqHXwnm.png",
     headline: "Best You Career Advantage",
     headlineColor__limio_color: "#FFFFFF",
     headlineFontSize: '3em',

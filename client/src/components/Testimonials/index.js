@@ -1,6 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 function Testimonials({ info }) {
+
+
 
   return (
 

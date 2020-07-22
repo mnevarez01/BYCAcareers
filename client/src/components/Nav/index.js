@@ -20,10 +20,12 @@ function Nav() {
   return (
     <nav>
       <div className="nav-wrapper color lighten-4">
-        <img src='https://i.imgur.com/637qk5Y.png' rel='logo' className='image' />
+        <img src='https://i.imgur.com/637qk5Y.png' rel='logo' className='image' alt='logo' />
 
         <Link to="/" className='links' onClick={renderHome} >
           Home</Link>
+        <Link to="/about" className='links' onClick={renderHome} >
+          About Me</Link>
         <Link className='links' to="/testimonials" onClick={renderTest}>
           Testimonial
   </Link>
