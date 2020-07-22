@@ -3,8 +3,8 @@ const nodemailer = require('nodemailer')
 const bodyParser = require('body-parser')
 const mongoose = require("mongoose");
 const routes = require("./routes");
-const process = require('dotenv').config()
-// const { getMaxListeners } = require("./models/testimony");
+const dotenv = require('dotenv').config()
+const { getMaxListeners } = require("./models/testimony");
 
 
 
@@ -15,6 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+console.log(dotenv)
 
 
 // Serve up static assets (usually on heroku)
@@ -28,38 +30,40 @@ app.get('/', (req, res) => {
   res.send('Server is working. Please post at "/contact" to submit a message.')
 });
 
-
+console.log('process', process.env.USER)
 app.post('/api/contact', (req, res) => {
 
   let data = req.body
-  let smtpTransport = nodemailer.createTransport({
-    service: "Gmail",
+  let output = `
+  <h3>Information<h3>
+  <ul>
+  <li> First Name ${data.name} </li>
+  <li> Last Name ${data.lastName}</li>
+  <li> Email: ${data.email}</li>
+  </ul>
+  <h3> Message: </h3>
+  <p> ${data.message} </p>
+  `
+
+  var smtpConfig = {
+    host: 'smtp.gmail.com',
     port: 465,
+    secure: true, // use SSL
     auth: {
-      user: process.env.DB_USER,
-      pass: process.env.DB_PASS
+      user: process.env.USER,
+      pass: process.env.PASS
     }
-  })
+  };
+  var transporter = nodemailer.createTransport(smtpConfig);
 
   let mailOptions = {
     from: data.email,
-    to: 'mnevarez1220@gmail.com',
+    to: process.env.USER,
     subject: `message from ${data.name}`,
-    html: `
-    
-    <h3>Information<h3>
-    <ul>
-    <li> First Name ${data.name} </li>
-    <li> Last Name ${data.lastName}</li>
-    <li> Email: ${data.email}</li>
-    
-    </ul>
-    <h3> Message: </h3>
-    <p> ${data.message} </p>
-    `
+    html: output
   };
 
-  smtpTransport.sendMail(mailOptions, (err) => {
+  transporter.sendMail(mailOptions, (err) => {
     if (err) {
       console.log('failure', err)
     }
@@ -69,7 +73,7 @@ app.post('/api/contact', (req, res) => {
     }
   })
 
-  smtpTransport.close();
+  transporter.close();
 
 
 });

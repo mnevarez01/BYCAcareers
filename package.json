@@ -27,5 +27,11 @@
     "if-env": "^1.0.4",
     "mongoose": "^5.3.16",
     "nodemailer": "^6.4.10"
+  },
+  "proxy": {
+    "/api": {
+      "target": "https://localhost:3001",
+      "secure": false
+    }
   }
 }
